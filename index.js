@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 
 
-const port = 3000;
+const port = process.argv[3] || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
