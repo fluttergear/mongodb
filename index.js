@@ -22,7 +22,7 @@ mongoose.connect("mongodb+srv://vikas:304215VVvv@cluster0.zex2pfn.mongodb.net/mo
 
 const db = mongoose.connection;
 
-db.on('errokr', console.error.bind(console, 'connection error'));
+db.on('error', console.error.bind(console, 'connection error'));
 
 db.once('open', function(){
   console.log("connection Done");
@@ -36,11 +36,9 @@ const UserSchame = new mongoose.Schema({
 const Todo = mongoose.model('users', UserSchame);
 
 
-app.get('/post', async (req, res) => {
+app.post('/post', async (req, res) => {
   try{
-    const todo = new Todo({
-      name: "asa"
-    });
+    const todo = new Todo(req.body);
     await todo.save();
     res.status(201).json(todo);
   } catch(err) {
@@ -58,10 +56,9 @@ app.get('/fetch', async (req, res) => {
 });
 
 
-app.get('/update/:id', async (req, res) => {
+app.put('/update/:id', async (req, res) => {
   try{
-    const todo = await Todo.findByIdAndUpdate( req.params.id,
-      {name: "vikas"},
+    const todo = await Todo.findByIdAndUpdate( req.params.id, req.body,
       {new: true}
       );
     res.status(201).json(todo);
@@ -70,7 +67,7 @@ app.get('/update/:id', async (req, res) => {
   }
 });
 
-app.get('/delete/:id', async (req, res) => {
+app.delete('/delete/:id', async (req, res) => {
   try{
     const todo = await Todo.findByIdAndDelete(req.params.id);
     res.status(201).json({message: "Deleted"});
