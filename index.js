@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -7,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 
 
-const port = process.argv[3] || 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
@@ -161,6 +162,6 @@ app.get('/', (req, res) => {
 // });
 
 
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
   console.log(`Listening on http://localhost:${port}`);
 })
