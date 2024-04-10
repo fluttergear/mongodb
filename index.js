@@ -22,7 +22,7 @@ mongoose.connect("mongodb+srv://vikas:304215VVvv@cluster0.zex2pfn.mongodb.net/mo
 
 const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'connection error'));
+db.on('errokr', console.error.bind(console, 'connection error'));
 
 db.once('open', function(){
   console.log("connection Done");
