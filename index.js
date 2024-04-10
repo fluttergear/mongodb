@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // mongoose.connect("mongodb+srv://vikas:304215VVvv@cluster0.zex2pfn.mongodb.net/movieapp?retryWrites=true&w=majority");
 
-mongoose.connect("mongodb+srv://vikas:304215VVvv@cluster0.zex2pfn.mongodb.net/movieapp?retryWrites=true&w=majority", {
+mongoose.connect(process.env.URL, {
   //useNewUrlParser: true,
   //useUnifiedTopology: true
 });
